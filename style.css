@@ -1,0 +1,230 @@
+:root {
+  --glow-color: #00f5ff;
+}
+
+body {
+  margin: 0;
+  background: #111;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.control-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  min-width: 200px;
+}
+
+.control-panel h2 {
+  font-size: 18px;
+  margin: 0 0 15px;
+  text-align: center;
+  color: var(--glow-color);
+  text-shadow: 0 0 5px var(--glow-color);
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.control-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.control-group input[type="color"],
+.control-group input[type="range"],
+.control-group input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input[type="color"] {
+  border: none;
+  background: transparent;
+  height: 30px;
+  padding: 0;
+  border-radius: 5px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--glow-color);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--glow-color);
+    transition: background 0.3s;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--glow-color);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--glow-color);
+  }
+  
+  input[type="range"]::-moz-range-track {
+    background: rgba(255, 255, 255, 0.1);
+    height: 6px;
+    border-radius: 5px;
+  }
+  
+  /* Checkbox styled to match cube color */
+  input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--glow-color);
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: var(--glow-color);
+    box-shadow: 0 0 8px var(--glow-color);
+  }
+  
+  input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 4px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    opacity: 0;
+    transform: rotate(45deg);
+    transition: opacity 0.2s;
+  }
+  
+  input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  size: 2rem;
+}
+
+.scene {
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  position: relative;
+  transition: transform 0.1s;
+  perspective-origin: center center;
+}
+#cube {
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  position: relative;
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: var(--glow-color);
+  opacity: 0.7;
+  border: 2px solid var(--glow-color);
+  box-shadow: 0 0 20px var(--glow-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  font-family: sans-serif;
+  text-shadow: 0 0 5px black, 0 0 10px rgb(255, 255, 255);
+  cursor: pointer;
+  transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.front {
+  transform: translateZ(100px);
+}
+.back {
+  transform: rotateY(180deg) translateZ(100px);
+}
+.right {
+  transform: rotateY(90deg) translateZ(100px);
+}
+.left {
+  transform: rotateY(-90deg) translateZ(100px);
+}
+.top {
+  transform: rotateX(90deg) translateZ(100px);
+}
+.bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+}
+
+.shadow {
+  position: absolute;
+  width: 160px;
+  height: 40px;
+  background: var(--glow-color);
+  opacity: 0.4;
+  filter: blur(20px);
+  border-radius: 50%;
+  bottom: 100px;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+#speedSlider {
+  cursor: pointer;
+}
+
+#colorPicker {
+  cursor: pointer;
+}
+#cube.broken .front {
+  transform: translateZ(300px);
+}
+#cube.broken .back {
+  transform: rotateY(180deg) translateZ(300px);
+}
+#cube.broken .right {
+  transform: rotateY(90deg) translateZ(300px);
+}
+#cube.broken .left {
+  transform: rotateY(-90deg) translateZ(300px);
+}
+#cube.broken .top {
+  transform: rotateX(90deg) translateZ(300px);
+}
+#cube.broken .bottom {
+  transform: rotateX(-90deg) translateZ(300px);
+}
